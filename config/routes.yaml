@@ -1,0 +1,9 @@
+health_check:
+  path: /health-check
+  controller: App\Controller\HealthCheckController
+  methods: [GET]
+
+messenger:
+  path: /messenger
+  controller: App\Controller\MessengerAction
+  methods: [GET]
