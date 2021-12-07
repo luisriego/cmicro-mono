@@ -17,6 +17,6 @@ class UserMessageHandler implements MessageHandlerInterface
     public function __invoke(UserMessage $message): void
     {
         $this->logger->info('NEW MESSAGE');
-        $this->logger->info(sprintf('Name: %s. Email: %s', $message->name, $message->email));
+        $this->logger->info(sprintf('Name: %s. Email: %s. Code: %s', $message->name, $message->email, $message->code));
     }
 }

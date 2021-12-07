@@ -127,16 +127,17 @@ class User implements UserInterface
             'id' => $this->id,
             'name' => $this->fullName(),
             'email' => $this->email,
-            'phones' => array_map(function (Phone $phone): array {
-                return $phone->toArray();
-            }, $this->phones->toArray()),
+            'code' => $this->code,
             'createdOn' => $this->createdOn->format(\DateTime::RFC3339),
         ];
     }
 
     private function fullName(): string
     {
-        return $this->name . ' ' . $this->surname;
+        if (null !== $this->surname) {
+            return $this->name . ' ' . $this->surname;
+        }
+        return $this->name;
     }
 
 //    Implementations

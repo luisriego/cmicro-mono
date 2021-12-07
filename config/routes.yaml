@@ -1,5 +1,5 @@
 health_check:
-  path: /health-check
+  path: /api/v1/health-check
   controller: App\Controller\HealthCheckController
   methods: [GET]
 
@@ -7,3 +7,14 @@ messenger:
   path: /messenger
   controller: App\Controller\MessengerAction
   methods: [GET]
+
+# User
+api_activate_user:
+  path: /api/v1/users/activate
+  controller: App\Controller\User\ActivateUserAction
+  methods: [PUT]
+
+api_create_user:
+  path: /api/v1/users/create
+  controller: App\Controller\User\CreateUserAction
+  methods: [POST]
