@@ -23,3 +23,8 @@ api_update_user:
   path: /api/v1/users/{id}
   controller: App\Controller\User\UpdateUserAction
   methods: [PUT]
+
+api_user_delete:
+  path: /api/v1/users/{id}
+  controller: App\Controller\User\DeleteUserAction
+  methods: [DELETE]
