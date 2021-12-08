@@ -39,7 +39,7 @@ class ValidateUserActionTest extends FunctionalTestBase
         self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
         $responseData = \json_decode($response->getContent(), true);
         self::assertEquals(null, $responseData['code']);
-        self::assertEquals(true, $responseData['active']);
+        self::assertEquals(true, $responseData['isActive']);
     }
 
     public function testValidateUserFailWithInvalidToken(): void
@@ -48,7 +48,7 @@ class ValidateUserActionTest extends FunctionalTestBase
 
         $payload = [
             'email' => 'juan@api.com',
-            'token' => $tokenInvalid,
+            'code' => $tokenInvalid,
             'password' => 'password'
         ];
 

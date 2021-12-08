@@ -9,10 +9,12 @@ use App\Trait\IsActiveTrait;
 use App\Trait\TimestampableTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use IdentifierTrait;
     use TimestampableTrait;
@@ -51,6 +53,16 @@ class User implements UserInterface
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getSurname(): string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): void
+    {
+        $this->surname = $surname;
     }
 
     public function getEmail(): string
@@ -121,18 +133,20 @@ class User implements UserInterface
         return $this->id === $user->getId();
     }
 
+    #[ArrayShape(['id' => "string", 'fullName' => "string", 'email' => "string", 'code' => "null|string", 'isActive' => "false", 'createdOn' => "string"])]
     public function toArray(): array
     {
         return [
             'id' => $this->id,
-            'name' => $this->fullName(),
+            'fullName' => $this->fullName(),
             'email' => $this->email,
             'code' => $this->code,
+            'isActive' => $this->isActive,
             'createdOn' => $this->createdOn->format(\DateTime::RFC3339),
         ];
     }
 
-    private function fullName(): string
+    public function fullName(): string
     {
         if (null !== $this->surname) {
             return $this->name . ' ' . $this->surname;
