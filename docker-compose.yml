@@ -1,10 +1,25 @@
 version: '3.5'
 
 services:
-  codenip-php81-symfony54:
-    container_name: codenip-php81-symfony54
+  cmicro-web:
+    container_name: cmicro-web
     build:
-      context: ./docker
+      context: ./docker/nginx
+      args:
+        UID: $U_ID
+    ports:
+      - "1100:80"
+    volumes:
+      - ./public:/appdata/www/public
+    depends_on:
+      - cmicro-be
+    networks:
+      - cmicro-network
+
+  cmicro-be:
+    container_name: cmicro-be
+    build:
+      context: ./docker/php
       args:
         UID: $U_ID
     volumes:
@@ -16,16 +31,16 @@ services:
     environment:
       XDEBUG_CLIENT_HOST: 172.17.0.1
       XDEBUG_CLIENT_PORT: 9003
-      PHP_IDE_CONFIG: serverName=codenip-php81-symfony54
+      PHP_IDE_CONFIG: serverName=cmicro-be
     ports:
       - '1000:8000'
     networks:
-      - codenip-php81-symfony54-network
+      - cmicro-network
     depends_on:
-      - codenip-php81-symfony54-postgres
+      - cmicro-postgres
 
-  codenip-php81-symfony54-postgres:
-    container_name: codenip-php81-symfony54-postgres
+  cmicro-postgres:
+    container_name: cmicro-postgres
     image: postgres:14-alpine
     ports:
       - '5432:5432'
@@ -34,12 +49,12 @@ services:
       POSTGRES_PASSWORD: passwd
       POSTGRES_DB: postgres_symfony
     volumes:
-      - codenip-php81-symfony54-pgsql-data:/var/lib/postgresql/data
+      - cmicro-pgsql-data:/var/lib/postgresql/data
     networks:
-      - codenip-php81-symfony54-network
+      - cmicro-network
 
-  codenip-php81-symfony54-mysql:
-    container_name: codenip-php81-symfony54-mysql
+  cmicro-mysql:
+    container_name: cmicro-mysql
     image: mysql:8.0.26
     ports:
       - '3336:3306'
@@ -47,24 +62,24 @@ services:
       MYSQL_DATABASE: mysql_symfony
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - codenip-php81-symfony54-mysql-data:/var/lib/mysql
+      - cmicro-mysql-data:/var/lib/mysql
     networks:
-      - codenip-php81-symfony54-network
+      - cmicro-network
     command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
 
-  codenip-php81-symfony54-rabbit:
-    container_name: codenip-php81-symfony54-rabbitmq
+  cmicro-rabbit:
+    container_name: cmicro-rabbitmq
     image: rabbitmq:3-management-alpine
     ports:
       - '5672:5672'
       - '15672:15672'
     networks:
-      - codenip-php81-symfony54-network
+      - cmicro-network
 
 networks:
-  codenip-php81-symfony54-network:
+  cmicro-network:
 
 volumes:
-  codenip-php81-symfony54-pgsql-data:
-  codenip-php81-symfony54-mysql-data:
+  cmicro-pgsql-data:
+  cmicro-mysql-data:
 

@@ -19,6 +19,11 @@ api_create_user:
   controller: App\Controller\User\CreateUserAction
   methods: [POST]
 
+api_change_password:
+  path: /api/v1/users/{id}/change_password
+  controller: App\Controller\User\ChangePasswordAction
+  methods: [PUT]
+
 api_update_user:
   path: /api/v1/users/{id}
   controller: App\Controller\User\UpdateUserAction

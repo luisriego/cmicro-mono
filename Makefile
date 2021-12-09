@@ -1,7 +1,7 @@
 #!/bin/bash
 
 UID = $(shell id -u)
-DOCKER_BE = codenip-php81-symfony54
+DOCKER_BE = cmicro-be
 
 help: ## Show this help message
 	@echo 'usage: make [target]'
@@ -10,7 +10,7 @@ help: ## Show this help message
 	@egrep '^(.+)\:\ ##\ (.+)' ${MAKEFILE_LIST} | column -t -c 2 -s ':#'
 
 start: ## Start the containers
-	docker network create codenip-php81-symfony54-network || true
+	docker network create cmicro-network || true
 	cp -n docker-compose.yml.dist docker-compose.yml || true
 	U_ID=${UID} docker-compose up -d
 

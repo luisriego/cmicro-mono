@@ -28,7 +28,7 @@ class CreateUserActionTest extends FunctionalTestBase
 
         self::assertEquals(JsonResponse::HTTP_CREATED, $response->getStatusCode());
         $responseData = \json_decode($response->getContent(), true);
-        self::assertArrayHasKey('name', $responseData);
+        self::assertArrayHasKey('fullName', $responseData);
         self::assertArrayHasKey('email', $responseData);
     }
 

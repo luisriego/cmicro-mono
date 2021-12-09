@@ -36,7 +36,8 @@ class UpdateUserActionTest extends FunctionalTestBase
     public function testUpdateUserFailNoName(): void
     {
         $payload = [
-            'name' => null
+            'name' => null,
+            'surname' => ''
         ];
 
         self::$authenticatedClient->request(

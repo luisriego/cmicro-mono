@@ -19,9 +19,9 @@ class UpdateUserAction
     {
         $responseData = \json_decode($request->getContent(), true);
 
-//        if (null === $name = $responseData['name']) {
-//            throw new BadRequestHttpException('Name param is mandatory');
-//        }
+        if (null === $responseData['name'] || $responseData['name'] === '') {
+            throw new BadRequestHttpException('Name param is mandatory');
+        }
 
         $user = $this->updateUserService->__invoke($id, $responseData);
 

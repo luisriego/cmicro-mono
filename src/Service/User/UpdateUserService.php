@@ -20,14 +20,11 @@ class UpdateUserService
             throw UserNotFoundException::fromId($id);
         }
 
-        if (null !== $name = $data['name']) {
-            $user->setName($name);
+        if (isset($data['surname']) && null !== $data['surname'] && $data['surname'] !== '') {
+            $user->setSurname($data['surname']);
         }
 
-        if (null !== $surname = $data['surname']) {
-            $user->setSurname($surname);
-        }
-
+        $user->setName($data['name']);
         $this->userRepository->save($user);
 
         return $user;
