@@ -40,7 +40,8 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
         try {
             return $this->userRepository->findOneByEmailOrFail($username);
         } catch (UserNotFoundException $e) {
-            throw new UsernameNotFoundException(\sprintf('User %s not found, $username'));
+            throw new UserNotFoundException('User %s not found, $username');
+//            throw new UsernameNotFoundException(\sprintf('User %s not found, $username'));
         }
     }
 

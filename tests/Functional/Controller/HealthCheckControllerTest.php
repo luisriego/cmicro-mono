@@ -2,23 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Functional\Controller;
+namespace App\Tests\Functional\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Tests\Functional\FunctionalTestBase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class HealthCheckControllerTest extends WebTestCase
+class HealthCheckControllerTest extends FunctionalTestBase
 {
     private const ENDPOINT = '/api/v1/health-check';
 
     public function testHealthCheck(): void
     {
-        $client = static::createClient();
-        $client->request(Request::METHOD_GET, self::ENDPOINT);
+        self::$baseClient->request(Request::METHOD_GET, self::ENDPOINT);
 
-        $response = $client->getResponse();
+        $response = self::$baseClient->getResponse();
 
-        self::assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
     }
 }

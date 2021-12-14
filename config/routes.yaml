@@ -19,10 +19,24 @@ api_create_user:
   controller: App\Controller\User\CreateUserAction
   methods: [POST]
 
+api_login_check:
+  path: /api/v1/users/login_check
+  methods: [POST]
+
+api_request_reset_password:
+  path: /api/v1/users/request_reset_password
+  controller: App\Controller\User\RequestResetPasswordAction
+  methods: [POST]
+
 api_change_password:
   path: /api/v1/users/{id}/change_password
   controller: App\Controller\User\ChangePasswordAction
   methods: [PUT]
+
+api_user_get:
+  path: /api/v1/users/{id}
+  controller: App\Controller\User\GetUserByIdAction
+  methods: [GET]
 
 api_update_user:
   path: /api/v1/users/{id}
@@ -33,3 +47,8 @@ api_user_delete:
   path: /api/v1/users/{id}
   controller: App\Controller\User\DeleteUserAction
   methods: [DELETE]
+
+api_user_get_all:
+  path: /api/v1/users
+  controller: App\Controller\User\GetUsersAction
+  methods: [GET]

@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Exception\User\UserNotFoundException;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class DoctrineUserRepository extends DoctrineBaseRepository
 {
@@ -133,7 +134,7 @@ class DoctrineUserRepository extends DoctrineBaseRepository
         return $this->getEntityManager()->getConnection()->executeQuery(\strtr($query, $params))->fetchAllAssociative();
     }
 
-    public function save(User $user): void
+    public function save(UserInterface $user): void
     {
         $this->saveEntity($user);
     }
