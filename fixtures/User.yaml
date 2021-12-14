@@ -21,3 +21,9 @@ App\Entity\User:
       email: another@api.com
     password: password
     isActive: true
+  User-inactiv:
+    __construct:
+      name: Inactiv
+      email: inactiv@api.com
+    password: <{testing_password_hash}>
+    isActive: false

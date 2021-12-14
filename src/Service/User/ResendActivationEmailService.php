@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace App\Service\User;
 
 use App\Entity\User;
-use App\Messenger\Message\RequestResetPasswordMessage;
-use App\Messenger\RoutingKey;
+use App\Exception\User\UserIsActiveException;
 use App\Repository\DoctrineUserRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp;
-use Symfony\Component\Messenger\MessageBusInterface;
 
-class RequestResetPasswordService
+class ResendActivationEmailService
 {
     public function __construct(private DoctrineUserRepository $userRepository)
     { }
@@ -25,7 +22,11 @@ class RequestResetPasswordService
     public function __invoke(string $email): User
     {
         $user = $this->userRepository->findOneByEmailOrFail($email);
-//        $user->setIsActive(false);
+
+        if ($user->isActive()) {
+            throw UserIsActiveException::fromEmail($email);
+        }
+
         $user->setCode(\sha1(\uniqid()));
 
         $this->userRepository->save($user);

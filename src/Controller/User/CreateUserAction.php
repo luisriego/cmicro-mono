@@ -19,6 +19,7 @@ class CreateUserAction
     public function __invoke(CreateUserRequest $request): ApiResponse
     {
         $user = $this->createUserService->__invoke($request->getName(), $request->getEmail());
+
         if ($user) {
             $this->bus->dispatch(new UserMessage($request->getName(), $request->getEmail(), $user->getCode()));
         }

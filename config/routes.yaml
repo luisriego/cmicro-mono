@@ -28,6 +28,11 @@ api_request_reset_password:
   controller: App\Controller\User\RequestResetPasswordAction
   methods: [POST]
 
+api_resend_activation_email:
+  path: /api/v1/users/resend_activation_email
+  controller: App\Controller\User\ResendActivationEmailAction
+  methods: [POST]
+
 api_change_password:
   path: /api/v1/users/{id}/change_password
   controller: App\Controller\User\ChangePasswordAction
