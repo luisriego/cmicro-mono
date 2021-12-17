@@ -9,15 +9,10 @@ class ResetPasswordRequest implements RequestDTO
 {
     #[Assert\NotBlank]
     #[Assert\Email]
-    private ?string $email;
+    public readonly ?string $email;
 
     public function __construct(Request $request)
     {
         $this->email = $request->request->get('email');
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
     }
 }

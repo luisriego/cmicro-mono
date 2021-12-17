@@ -9,15 +9,10 @@ class UpdateNameRequest implements RequestDTO
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 3)]
-    private ?string $name;
+    public readonly ?string $name;
 
     public function __construct(Request $request)
     {
         $this->name = $request->request->get('name');
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
     }
 }

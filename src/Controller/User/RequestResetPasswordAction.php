@@ -24,10 +24,10 @@ class RequestResetPasswordAction
      */
     public function __invoke(ResetPasswordRequest $resetPasswordRequest): ApiResponse
     {
-        $user = $this->resetPasswordService->__invoke($resetPasswordRequest->getEmail());
+        $user = $this->resetPasswordService->__invoke($resetPasswordRequest->email);
 
         if ($user) {
-            $this->bus->dispatch(new RequestResetPasswordMessage($user->getName(), $resetPasswordRequest->getEmail(), $user->getCode()));
+            $this->bus->dispatch(new RequestResetPasswordMessage($user->getName(), $resetPasswordRequest->email, $user->getCode()));
         }
 
         return new ApiResponse(['message' => 'Request reset password email sent']);

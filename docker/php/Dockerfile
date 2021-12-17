@@ -15,6 +15,7 @@ RUN apt update \
     && apt install -y git acl openssl openssh-client wget zip \
     && apt install -y libpng-dev zlib1g-dev libzip-dev libxml2-dev libicu-dev \
     && docker-php-ext-install intl pdo zip \
+    && docker-php-ext-install xsl \
     # for MySQL
     && docker-php-ext-install pdo_mysql \
     # for Postgres

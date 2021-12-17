@@ -9,25 +9,15 @@ class ChangePasswordRequest implements RequestDTO
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 6)]
-    private ?string $oldPass;
+    public readonly ?string $oldPass;
 
     #[Assert\NotBlank]
     #[Assert\Length(min: 6)]
-    private ?string $newPass;
+    public readonly ?string $newPass;
 
     public function __construct(Request $request)
     {
         $this->oldPass = $request->request->get('oldPass');
         $this->newPass = $request->request->get('newPass');
-    }
-
-    public function getOldPass(): string
-    {
-        return $this->oldPass;
-    }
-
-    public function getNewPass(): string
-    {
-        return $this->newPass;
     }
 }

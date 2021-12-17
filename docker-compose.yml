@@ -76,6 +76,15 @@ services:
     networks:
       - cmicro-network
 
+  cmicro-mailer:
+    container_name: cmicro-mailer
+    image: schickling/mailcatcher
+    ports:
+      - '1025:1025'
+      - '1080:1080'
+    networks:
+      - cmicro-network
+
 networks:
   cmicro-network:
 

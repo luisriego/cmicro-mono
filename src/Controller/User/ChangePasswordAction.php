@@ -17,7 +17,7 @@ class ChangePasswordAction
 
     public function __invoke(ChangePasswordRequest $request, User $user): ApiResponse
     {
-        $user = $this->changePasswordService->__invoke($request->getOldPass(), $request->getNewPass(), $user);
+        $user = $this->changePasswordService->__invoke($request->oldPass, $request->newPass, $user);
 
         return new ApiResponse($user->toArray());
     }

@@ -7,6 +7,7 @@ namespace App\Controller\User;
 use App\Http\DTO\CreateUserRequest;
 use App\Http\Response\ApiResponse;
 use App\Messenger\Message\UserMessage;
+use App\Messenger\Message\UserRegisteredMessage;
 use App\Service\User\CreateUserService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -18,10 +19,11 @@ class CreateUserAction
 
     public function __invoke(CreateUserRequest $request): ApiResponse
     {
-        $user = $this->createUserService->__invoke($request->getName(), $request->getEmail());
+        $user = $this->createUserService->__invoke($request->name, $request->email);
 
         if ($user) {
-            $this->bus->dispatch(new UserMessage($request->getName(), $request->getEmail(), $user->getCode()));
+            $this->bus->dispatch(new UserMessage($request->name, $request->email, $user->getCode()));
+            $this->bus->dispatch(new UserRegisteredMessage($request->name, $request->email, $user->getCode()));
         }
 
         return new ApiResponse($user->toArray(), Response::HTTP_CREATED);

@@ -24,10 +24,10 @@ class ResendActivationEmailAction
      */
     public function __invoke(ResetPasswordRequest $request): ApiResponse
     {
-        $user = $this->resendActivationEmailService->__invoke($request->getEmail());
+        $user = $this->resendActivationEmailService->__invoke($request->email);
 
         if ($user) {
-            $this->bus->dispatch(new UserMessage($user->getName(), $request->getEmail(), $user->getCode()));
+            $this->bus->dispatch(new UserMessage($user->getName(), $request->email, $user->getCode()));
         }
 
         return new ApiResponse($user->toArray(), Response::HTTP_OK);

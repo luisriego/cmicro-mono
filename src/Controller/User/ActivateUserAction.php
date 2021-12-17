@@ -16,7 +16,7 @@ class ActivateUserAction
 
     public function __invoke(ActivateUserRequest $request): JsonResponse
     {
-        $user = $this->activateUserService->__invoke($request->getEmail(), $request->getCode(), $request->getPassword());
+        $user = $this->activateUserService->__invoke($request->email, $request->code, $request->password);
 
         return new JsonResponse($user->toArray());
     }

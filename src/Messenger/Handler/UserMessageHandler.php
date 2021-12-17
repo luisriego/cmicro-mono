@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use App\Messenger\Message\UserMessage;
 
-class UserMessageHandler implements MessageHandlerInterface
+class  UserMessageHandler implements MessageHandlerInterface
 {
     public function __construct(private LoggerInterface $logger)
     {

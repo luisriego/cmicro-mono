@@ -9,25 +9,15 @@ class CreateUserRequest implements RequestDTO
 {
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 20)]
-    private ?string $name;
+    public readonly ?string $name;
 
     #[Assert\NotBlank]
     #[Assert\Email]
-    private ?string $email;
+    public readonly ?string $email;
 
     public function __construct(Request $request)
     {
         $this->name = $request->request->get('name');
         $this->email = $request->request->get('email');
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
     }
 }
