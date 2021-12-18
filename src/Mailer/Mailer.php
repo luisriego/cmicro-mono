@@ -13,7 +13,9 @@ use Twig\Environment;
 class Mailer implements IMailer
 {
     public const TEMPLATE_SUBJECT_MAP = [
-        TwigTemplate::REGISTER_USER => 'Welcome to Clínica do Micro App!'
+        TwigTemplate::REGISTER_USER => 'Welcome to Clínica do Micro App!',
+        TwigTemplate::CHANGE_PASSWORD => 'Do you want to change your password?',
+        TwigTemplate::RESET_PASSWORD => 'You claim to us reset your password!',
     ];
 
     public function __construct(

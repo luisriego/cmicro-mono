@@ -23,6 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $name;
     private string $surname;
     private string $email;
+    private array $roles;
     private ?string $password;
     private ?string $code;
     private ?string $avatar;
@@ -35,6 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->name = $name;
         $this->surname = '';
         $this->email = $email;
+        $this->roles = ['ROLE_USER'];
         $this->password = null;
         $this->code = \sha1(\uniqid());
         $this->avatar = null;
@@ -158,7 +160,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return [];
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
     }
 
     public function getSalt()

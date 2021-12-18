@@ -1,9 +1,11 @@
-{#{% apply inky_to_html) %}#}
+{% extends 'base.html.twig' %}
+
+{% block body %}
     <container>
         <row class="header">
             <columns>
                 <a href="">
-                    <img src="{{ email.image('@images/email/logo.png') }}" class="logo" alt="SpaceBar Logo">
+{#                    <img src="{{ email.image('@images/email/logo.png') }}" class="logo" alt="SpaceBar Logo">#}
                 </a>
             </columns>
         </row>
@@ -74,4 +76,4 @@
             </columns>
         </row>
     </container>
-{% endapply %}
+{% endblock %}

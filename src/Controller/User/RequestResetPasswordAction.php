@@ -7,7 +7,6 @@ namespace App\Controller\User;
 use App\Http\DTO\ResetPasswordRequest;
 use App\Http\Response\ApiResponse;
 use App\Messenger\Message\RequestResetPasswordMessage;
-use App\Messenger\Message\UserMessage;
 use App\Service\User\RequestResetPasswordService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -22,12 +21,13 @@ class RequestResetPasswordAction
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function __invoke(ResetPasswordRequest $resetPasswordRequest): ApiResponse
+    public function __invoke(ResetPasswordRequest $request): ApiResponse
     {
-        $user = $this->resetPasswordService->__invoke($resetPasswordRequest->email);
+        $user = $this->resetPasswordService->__invoke($request->email);
 
         if ($user) {
-            $this->bus->dispatch(new RequestResetPasswordMessage($user->getName(), $resetPasswordRequest->email, $user->getCode()));
+            $this->bus->dispatch(new RequestResetPasswordMessage($user->getName(), $request->email, $user->getCode()));
+            $this->bus->dispatch(new RequestResetPasswordMessage($user->getName(), $request->email, $user->getCode()));
         }
 
         return new ApiResponse(['message' => 'Request reset password email sent']);

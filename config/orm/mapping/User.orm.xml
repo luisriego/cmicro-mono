@@ -6,6 +6,7 @@
         <field name="name" length="20" />
         <field name="surname" length="30" nullable="true" />
         <field name="email" length="100" />
+        <field name="roles" type="json" />
         <field name="password" length="100" nullable="true" />
         <field name="code" nullable="true" column-definition="CHAR(40)" />
         <field name="avatar" length="255" nullable="true" />
