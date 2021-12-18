@@ -16,6 +16,7 @@ class Mailer implements IMailer
         TwigTemplate::REGISTER_USER => 'Welcome to Clínica do Micro App!',
         TwigTemplate::CHANGE_PASSWORD => 'Do you want to change your password?',
         TwigTemplate::RESET_PASSWORD => 'You claim to us reset your password!',
+        TwigTemplate::RESEND_ACTIVATION_EMAIL => 'You claim for a new activation email!',
     ];
 
     public function __construct(

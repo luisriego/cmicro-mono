@@ -6,19 +6,16 @@ namespace App\Messenger\Handler;
 
 use App\Mailer\IMailer;
 use App\Mailer\TwigTemplate;
-use App\Messenger\Message\RequestResetPasswordMessage;
-use App\Messenger\Message\UserRegisteredMessage;
-use Psr\Log\LoggerInterface;
+use App\Messenger\Message\ResendActivationEmailMessage;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use App\Messenger\Message\UserMessage;
 
-class RequestResetPasswordMessageHandler implements MessageHandlerInterface
+class  ResendActivationEmailMessageHandler implements MessageHandlerInterface
 {
     public function __construct(private IMailer $mailer)
     {
     }
 
-    public function __invoke(RequestResetPasswordMessage $message): void
+    public function __invoke(ResendActivationEmailMessage $message): void
     {
         $payload = [
             'name' => $message->name,
@@ -26,6 +23,6 @@ class RequestResetPasswordMessageHandler implements MessageHandlerInterface
             'code' => $message->code
         ];
 
-        $this->mailer->send($message->email, TwigTemplate::RESET_PASSWORD, $payload);
+        $this->mailer->send($message->email, TwigTemplate::RESEND_ACTIVATION_EMAIL, $payload);
     }
 }
