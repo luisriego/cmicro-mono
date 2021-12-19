@@ -8,11 +8,11 @@
         <field name="createdOn" type="datetime" column-definition="DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP" />
         <field name="updatedOn" type="datetime" />
 
-<!--        <one-to-one target-entity="App\Entity\User" field="user" inversed-by="employee" />-->
+        <one-to-one target-entity="App\Entity\User" field="user" inversed-by="employee" />
 
         <unique-constraints>
             <unique-constraint columns="cpf" name="U_employee_cpf" />
-<!--            <unique-constraint columns="user_id" name="U_employee_user_id" />-->
+            <unique-constraint columns="user_id" name="U_employee_user_id" />
         </unique-constraints>
 
         <lifecycle-callbacks>

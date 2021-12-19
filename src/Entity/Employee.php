@@ -14,13 +14,13 @@ class Employee
 
     private string $cpf;
     private bool $isActive;
-//    private User $user;
+    private User $user;
 
     public function __construct(string $cpf, User $user)
     {
         $this->id = Uuid::v4()->toRfc4122();
         $this->cpf = $cpf;
-//        $this->user = $user;
+        $this->user = $user;
         $this->isActive = true;
         $this->createdOn = new \DateTime();
         $this->createdOn = new \DateTime();
@@ -50,6 +50,16 @@ class Employee
     public function fire(): void
     {
         $this->isActive = false;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 
     // public function assign(Ticket $ticket): void
