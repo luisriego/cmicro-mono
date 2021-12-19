@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="App\Entity\Client" table="client">
+        <id name="id" type="string" column-definition="CHAR(36) NOT NULL" />
+
+        <field name="companyName" length="150" />
+        <field name="cnpj" length="14" />
+        <field name="avatar" length="250" nullable="true" />
+        <field name="visible" type="boolean" />
+        <field name="xRays" length="255" nullable="true" />
+        <field name="createdOn" type="datetime" column-definition="DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP" />
+        <field name="updatedOn" type="datetime" />
+
+        <one-to-many field="users" target-entity="App\Entity\User" mapped-by="client" />
+<!--        <one-to-many field="tickets" target-entity="App\Entity\Ticket" mapped-by="client" />-->
+
+        <unique-constraints>
+            <unique-constraint columns="cnpj" name="U_client_cnpj" />
+        </unique-constraints>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="preUpdate" method="markAsUpdated" />
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>

@@ -18,7 +18,8 @@ class ValidateUserActionTest extends FunctionalTestBase
     {
         $payload = [
             'name' => 'Juan',
-            'email' => 'juan2@api.com'
+            'email' => 'juan2@api.com',
+            'client' => '00000000000000'
         ];
 
         self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT_CREATE, [], [], [], \json_encode($payload));
@@ -29,7 +30,8 @@ class ValidateUserActionTest extends FunctionalTestBase
         $payload = [
             'email' => 'juan2@api.com',
             'code' => $code,
-            'password' => 'password'
+            'password' => 'password',
+            'client' => '00000000000000'
         ];
 
         self::$baseClient->request(Request::METHOD_PUT, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -49,7 +51,8 @@ class ValidateUserActionTest extends FunctionalTestBase
         $payload = [
             'email' => 'juan@api.com',
             'code' => $tokenInvalid,
-            'password' => 'password'
+            'password' => 'password',
+            'client' => '00000000000000'
         ];
 
         self::$baseClient->request(Request::METHOD_PUT, self::ENDPOINT, [], [], [], \json_encode($payload));

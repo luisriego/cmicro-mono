@@ -6,6 +6,7 @@ App\Entity\User:
     __construct:
       name: Default
       email: default@api.com
+      client: '@Client-1'
     password: <{testing_password_hash}>
     isActive: true
 #    phones: ['@Phone-1', '@Phone-2']
@@ -13,17 +14,20 @@ App\Entity\User:
     __construct:
       name: Luis
       email: luis@api.com
+      client: '@Client-1'
     password: <{testing_password_hash}>
     isActive: true
   User-another:
     __construct:
       name: Another
       email: another@api.com
+      client: '@Client-1'
     password: password
     isActive: true
   User-inactiv:
     __construct:
       name: Inactiv
       email: inactiv@api.com
+      client: '@Client-1'
     password: <{testing_password_hash}>
     isActive: false

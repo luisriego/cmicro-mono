@@ -27,10 +27,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password;
     private ?string $code;
     private ?string $avatar;
-//    private ?Client $client;
+    private Client $client;
 //    private Collection $phones;
 
-    public function __construct(string $name, string $email, ?string $surname = '') 
+    public function __construct(string $name, string $email, Client $client, ?string $surname = '')
     {
         $this->id = Uuid::v4()->toRfc4122();
         $this->name = $name;
@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = null;
         $this->code = \sha1(\uniqid());
         $this->avatar = null;
-//        $this->client = null;
+        $this->client = $client;
 //        $this->phones = new ArrayCollection();
         $this->isActive = false;
         $this->createdOn = new \DateTime();
@@ -97,16 +97,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $password;
     }
 
-//    public function getClient(): ?Client
-//    {
-//        return $this->client;
-//    }
-//
-//    public function setClient(?Client $client): void
-//    {
-//        $this->client = $client;
-//    }
-//
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): void
+    {
+        $this->client = $client;
+    }
+
 //    /**
 //     * @return ArrayCollection|Collection
 //     */

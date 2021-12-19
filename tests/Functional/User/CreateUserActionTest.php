@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\User;
 
+use App\Entity\Client;
 use App\Tests\Functional\FunctionalTestBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,9 +15,11 @@ class CreateUserActionTest extends FunctionalTestBase
 
     public function testCreateUser(): void
     {
+
         $payload = [
             'name' => 'Juan',
-            'email' => 'juan@api.com'
+            'email' => 'juan@api.com',
+            'client' => '00000000000000'
         ];
 
         self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -33,7 +36,8 @@ class CreateUserActionTest extends FunctionalTestBase
     {
         $payload = [
             'name' => 'Juan',
-            'email' => 'juan@api.com'
+            'email' => 'juan@api.com',
+            'client' => '00000000000000'
         ];
 
         self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -47,7 +51,8 @@ class CreateUserActionTest extends FunctionalTestBase
      public function testCreateUserWithNoName(): void
      {
          $payload = [
-             'email' => 'juan@api.com'
+             'email' => 'juan@api.com',
+             'client' => '00000000000000'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -60,7 +65,8 @@ class CreateUserActionTest extends FunctionalTestBase
      public function testCreateUserWithNoEmail(): void
      {
          $payload = [
-             'name' => 'Juan'
+             'name' => 'Juan',
+             'client' => '00000000000000'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -74,7 +80,8 @@ class CreateUserActionTest extends FunctionalTestBase
      {
          $payload = [
              'name' => 'a',
-             'email' => 'juan@api.com'
+             'email' => 'juan@api.com',
+             'client' => '00000000000000'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -88,7 +95,8 @@ class CreateUserActionTest extends FunctionalTestBase
      {
          $payload = [
              'name' => 'Juan',
-             'email' => 'api.com'
+             'email' => 'api.com',
+             'client' => '00000000000000'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
