@@ -20,7 +20,7 @@ class Client
     private bool $visible;
     private ?string $avatar;
     private Collection $users;
-//    private Collection $tickets;
+    private Collection $tickets;
 
     public function __construct(
         string $companyName,
@@ -33,7 +33,7 @@ class Client
         $this->visible = true;
         $this->avatar = "default.png";
         $this->users = new ArrayCollection();
-//        $this->tickets = new ArrayCollection();
+        $this->tickets = new ArrayCollection();
         $this->createdOn = new \DateTime();
         $this->createdOn = new \DateTime();
         $this->markAsUpdated();
@@ -89,27 +89,24 @@ class Client
         }
     }
 
-//    /**
-//     * @return ArrayCollection|Collection
-//     */
-//    public function getTickets(): ArrayCollection
-//    {
-//        return $this->tickets;
-//    }
-//
-//    public function addTicket(Ticket $ticket): void
-//    {
-//        if (!$this->tickets->contains($ticket)) {
-//            $this->tickets->add($ticket);
-//        }
-//    }
-//
-//    public function removeTicket(Ticket $ticket): void
-//    {
-//        if ($this->tickets->contains($ticket)) {
-//            $this->tickets->removeElement($ticket);
-//        }
-//    }
+    public function getTickets(): ArrayCollection|Collection
+    {
+        return $this->tickets;
+    }
+
+    public function addTicket(Ticket $ticket): void
+    {
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets->add($ticket);
+        }
+    }
+
+    public function removeTicket(Ticket $ticket): void
+    {
+        if ($this->tickets->contains($ticket)) {
+            $this->tickets->removeElement($ticket);
+        }
+    }
 
     public function cnpjValidate(string $cnpj): bool
     {

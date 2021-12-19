@@ -1,0 +1,10 @@
+App\Entity\Ticket:
+  Ticket-1:
+    __construct:
+      message: "A message for the ticket creator"
+      client: '@Client-1'
+
+  Ticket-another:
+    __construct:
+      message: "Another message for the ticket creator"
+      client: '@Client-1'

@@ -12,7 +12,7 @@
         <field name="updatedOn" type="datetime" />
 
         <one-to-many field="users" target-entity="App\Entity\User" mapped-by="client" />
-<!--        <one-to-many field="tickets" target-entity="App\Entity\Ticket" mapped-by="client" />-->
+        <one-to-many field="tickets" target-entity="App\Entity\Ticket" mapped-by="client" />
 
         <unique-constraints>
             <unique-constraint columns="cnpj" name="U_client_cnpj" />
