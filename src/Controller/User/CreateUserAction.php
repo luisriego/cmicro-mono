@@ -14,17 +14,17 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class CreateUserAction
 {
-    public function __construct(private CreateUserService $createUserService, private MessageBusInterface $bus)
+    public function __construct(private CreateUserService $createUserService)
     { }
 
     public function __invoke(CreateUserRequest $request): ApiResponse
     {
         $user = $this->createUserService->__invoke($request->name, $request->email, $request->client);
 
-        if ($user) {
-            $this->bus->dispatch(new UserMessage($request->name, $request->email, $user->getCode()));
-            $this->bus->dispatch(new UserRegisteredMessage($request->name, $request->email, $user->getCode()));
-        }
+//        if ($user) {
+//            $this->bus->dispatch(new UserMessage($request->name, $request->email, $user->getCode()));
+//            $this->bus->dispatch(new UserRegisteredMessage($request->name, $request->email, $user->getCode()));
+//        }
 
         return new ApiResponse($user->toArray(), Response::HTTP_CREATED);
     }

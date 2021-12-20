@@ -31,13 +31,18 @@ class DoctrineClientRepository extends DoctrineBaseRepository
         return $client;
     }
 
+    public function findOneByCnpj(string $cnpj): ?Client
+    {
+        return $this->objectRepository->findOneBy(['cnpj' => $cnpj]);
+    }
+
     public function findOneByCnpjOrFail(string $cnpj): ?Client
     {
-        if (null === $user = $this->objectRepository->findOneBy(['cnpj' => $cnpj])) {
+        if (null === $client = $this->objectRepository->findOneBy(['cnpj' => $cnpj])) {
             throw ClientNotFoundException::fromCnpj($cnpj);
         }
 
-        return $user;
+        return $client;
     }
 
     public function save(Client $client): void

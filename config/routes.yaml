@@ -57,3 +57,15 @@ api_user_get_all:
   path: /api/v1/users
   controller: App\Controller\User\GetUsersAction
   methods: [GET]
+
+
+# Client
+#api_activate_user:
+#  path: /api/v1/users/activate
+#  controller: App\Controller\User\ActivateUserAction
+#  methods: [PUT]
+
+api_create_client:
+  path: /api/v1/clients/create
+  controller: App\Controller\Client\CreateClientAction
+  methods: [POST]

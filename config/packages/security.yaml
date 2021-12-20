@@ -1,4 +1,9 @@
 security:
+    role_hierarchy:
+        ROLE_CLIENT: ROLE_USER
+        ROLE_EMPLOYEE: ROLE_CLIENT
+        ROLE_ADMIN: ROLE_EMPLOYEE
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
     enable_authenticator_manager: true
     password_hashers:
         App\Entity\User:

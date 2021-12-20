@@ -5,15 +5,20 @@ namespace App\Service\User;
 use App\Entity\User;
 use App\Exception\Client\ClientNotFoundException;
 use App\Exception\User\UserAlreadyExistsException;
+use App\Messenger\Message\UserMessage;
+use App\Messenger\Message\UserRegisteredMessage;
 use App\Repository\DoctrineClientRepository;
 use App\Repository\DoctrineUserRepository;
 use Doctrine\ORM\ORMException;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class CreateUserService
 {
     public function __construct(
         private DoctrineUserRepository $userRepository,
-        private DoctrineClientRepository $clientRepo)
+        private DoctrineClientRepository $clientRepo,
+        private MessageBusInterface $bus,
+    )
     { }
 
     public function __invoke(string $name, string $email, string $cnpj): User
@@ -33,6 +38,9 @@ class CreateUserService
         } catch (ORMException $e) {
             throw UserAlreadyExistsException::fromEmail($email);
         }
+
+        $this->bus->dispatch(new UserMessage($name, $email, $user->getCode()));
+        $this->bus->dispatch(new UserRegisteredMessage($name, $email, $user->getCode()));
 
         return $user;
     }

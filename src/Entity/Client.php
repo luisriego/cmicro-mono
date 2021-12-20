@@ -169,7 +169,7 @@ class Client
     {
         return [
             'id' => $this->id,
-            'name' => $this->companyName,
+            'companyName' => $this->companyName,
             'cnpj' => $this->cnpj,
             'createdOn' => $this->createdOn->format(\DateTime::RFC3339),
         ];

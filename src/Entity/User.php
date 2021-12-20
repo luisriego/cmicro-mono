@@ -10,6 +10,7 @@ use App\Trait\TimestampableTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
@@ -130,6 +131,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //    }
 
 
+    #[Pure]
     public function equals(User $user): bool
     {
         return $this->id === $user->getId();
@@ -171,6 +173,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
         return $this;
     }
+
+    public function addRole(String $role): void
+    {
+//        if (!$this->roles->contains($role)) {
+//            $this->roles[] = $role;
+//        }
+        $this->roles[] = $role;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
+        }
+
+        return $this;
+    }
+
 
     public function getSalt()
     {

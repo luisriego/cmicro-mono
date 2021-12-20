@@ -18,6 +18,7 @@ class FunctionalTestBase extends WebTestCase
     private static ?KernelBrowser $client = null;
     protected static ?KernelBrowser $baseClient = null;
     protected static ?KernelBrowser $authenticatedClient = null;
+    protected static ?KernelBrowser $authenticatedAdminClient = null;
     protected static ?KernelBrowser $anotherAuthenticatedClient = null;
 
     public function setUp(): void
@@ -49,6 +50,19 @@ class FunctionalTestBase extends WebTestCase
              ]);
          }
 
+        if (null === self::$authenticatedAdminClient) {
+            self::$authenticatedAdminClient = clone self::$client;
+
+            $user = static::$container->get(DoctrineUserRepository::class)->findOneByEmailOrFail('luis@api.com');
+            $token = static::$container->get(JWTTokenManagerInterface::class)->create($user);
+
+            self::$authenticatedClient->setServerParameters([
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_ACCEPT' => 'application/json',
+                'HTTP_Authorization' => \sprintf('Bearer %s', $token),
+            ]);
+        }
+
         if (null === self::$anotherAuthenticatedClient) {
             self::$anotherAuthenticatedClient = clone self::$client;
 
@@ -75,6 +89,11 @@ class FunctionalTestBase extends WebTestCase
     protected function getLuisId()
     {
         return self::initDBConnection()->executeQuery('SELECT id FROM user WHERE email = "luis@api.com"')->fetchOne();
+    }
+
+    protected function getAdminId()
+    {
+        return self::initDBConnection()->executeQuery('SELECT id FROM user WHERE email = "admin@api.com"')->fetchOne();
     }
 
     protected function getAnotherId()
