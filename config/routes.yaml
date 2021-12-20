@@ -65,6 +65,11 @@ api_user_get_all:
 #  controller: App\Controller\User\ActivateUserAction
 #  methods: [PUT]
 
+api_create_user_client:
+  path: /api/v1/clients/create_user
+  controller: App\Controller\Client\CreateUserByClientAction
+  methods: [POST]
+
 api_create_client:
   path: /api/v1/clients/create
   controller: App\Controller\Client\CreateClientAction

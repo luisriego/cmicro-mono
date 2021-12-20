@@ -1,12 +1,12 @@
 App\Entity\Client:
   Client-1:
     __construct:
-      companyName: "Enterprise Business"
-      cnpj: "00000000000000"
-    xRays: "One text"
+      companyName: "Gaslima Ltda."
+      cnpj: "01860823000150"
+    xRays: "Gas a gogó"
 
   Client-another:
     __construct:
-      companyName: "Another Enterprise Business"
-      cnpj: "11111111111111"
-    xRays: "Another text"
+      companyName: "Engeloc Empreendimentos Ltda."
+      cnpj: "01383614000162"
+    xRays: "Locação de escada e coisas afins"

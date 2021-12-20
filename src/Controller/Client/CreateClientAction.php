@@ -9,6 +9,7 @@ use App\Exception\User\UserHasNotAuthorizationException;
 use App\Http\DTO\Client\CreateClientRequest;
 use App\Http\Response\ApiResponse;
 use App\Messenger\Message\Client\ClientMessage;
+use App\Repository\DoctrineUserRepository;
 use App\Service\Client\CreateClientService;
 use App\Service\User\CreateUserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,7 @@ class CreateClientAction extends AbstractController
     public function __construct(
         private CreateClientService $createClientService,
         private CreateUserService $createUserService,
+        private DoctrineUserRepository $userRepository,
         private MessageBusInterface $bus
     ) { }
 
@@ -35,7 +37,10 @@ class CreateClientAction extends AbstractController
             $this->bus->dispatch(new ClientMessage($request->companyName, $request->cnpj));
         }
 
-        $this->createUserService->__invoke($request->companyName, $request->email, $client->getCnpj());
+        $user = $this->createUserService->__invoke($request->companyName, $request->email, $client->getCnpj());
+        $user->addRole('ROLE_CLIENT');
+        $this->userRepository->save($user);
+
 
         return new ApiResponse($client->toArray(), Response::HTTP_CREATED);
     }

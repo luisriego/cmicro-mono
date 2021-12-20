@@ -8,6 +8,7 @@ use App\Entity\Client;
 use App\Tests\Functional\FunctionalTestBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CreateUserActionTest extends FunctionalTestBase
 {
@@ -19,14 +20,14 @@ class CreateUserActionTest extends FunctionalTestBase
         $payload = [
             'name' => 'Juan',
             'email' => 'juan@api.com',
-            'client' => '00000000000000'
+            'client' => '01383614000162'
         ];
 
         self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
 
         $response = self::$baseClient->getResponse();
 
-        self::assertEquals(JsonResponse::HTTP_CREATED, $response->getStatusCode());
+        self::assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
         $responseData = \json_decode($response->getContent(), true);
         self::assertArrayHasKey('fullName', $responseData);
         self::assertArrayHasKey('email', $responseData);
@@ -37,14 +38,14 @@ class CreateUserActionTest extends FunctionalTestBase
         $payload = [
             'name' => 'Juan',
             'email' => 'juan@api.com',
-            'client' => '00000000000000'
+            'client' => '01383614000162'
         ];
 
         self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
 
         $response = self::$baseClient->getResponse();
 
-        self::assertEquals(JsonResponse::HTTP_CONFLICT, $response->getStatusCode());
+        self::assertEquals(Response::HTTP_CONFLICT, $response->getStatusCode());
 
     }
 
@@ -52,7 +53,7 @@ class CreateUserActionTest extends FunctionalTestBase
      {
          $payload = [
              'email' => 'juan@api.com',
-             'client' => '00000000000000'
+             'client' => '01383614000162'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -66,7 +67,7 @@ class CreateUserActionTest extends FunctionalTestBase
      {
          $payload = [
              'name' => 'Juan',
-             'client' => '00000000000000'
+             'client' => '01383614000162'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -81,7 +82,7 @@ class CreateUserActionTest extends FunctionalTestBase
          $payload = [
              'name' => 'a',
              'email' => 'juan@api.com',
-             'client' => '00000000000000'
+             'client' => '01383614000162'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));
@@ -96,7 +97,7 @@ class CreateUserActionTest extends FunctionalTestBase
          $payload = [
              'name' => 'Juan',
              'email' => 'api.com',
-             'client' => '00000000000000'
+             'client' => '01383614000162'
          ];
 
          self::$baseClient->request(Request::METHOD_POST, self::ENDPOINT, [], [], [], \json_encode($payload));

@@ -11,5 +11,6 @@ The following information is required:
 - CNPJ
 - Email
 
-an email will send wiht the create user link.
+An email will send and a main User is create for this client.
+This user will have a client role. 
 You may need some other information, for example, contact numbers, etc.
