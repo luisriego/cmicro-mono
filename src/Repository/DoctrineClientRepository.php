@@ -22,6 +22,11 @@ class DoctrineClientRepository extends DoctrineBaseRepository
         return $this->objectRepository->findAll();
     }
 
+    public function findOneById(string $id): ?Client
+    {
+        return $this->objectRepository->findOneBy(['id' => $id]);
+    }
+
     public function findOneByIdOrFail(string $id): ?Client
     {
         if (null === $client = $this->objectRepository->findOneBy(['id' => $id])) {

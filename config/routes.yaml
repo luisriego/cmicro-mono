@@ -75,6 +75,11 @@ api_client_create:
   controller: App\Controller\Client\CreateClientAction
   methods: [POST]
 
+api_client_get:
+  path: /api/v1/clients/{id}
+  controller: App\Controller\Client\GetClientByIdAction
+  methods: [GET]
+
 api_client_update:
   path: /api/v1/clients/{id}
   controller: App\Controller\Client\UpdateClientAction
@@ -84,3 +89,8 @@ api_client_delete:
   path: /api/v1/clients/{id}
   controller: App\Controller\Client\DeleteClientAction
   methods: [DELETE]
+
+api_client_get_all:
+  path: /api/v1/clients
+  controller: App\Controller\Client\GetClientsAction
+  methods: [GET]
