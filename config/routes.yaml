@@ -80,3 +80,7 @@ api_client_update:
   controller: App\Controller\Client\UpdateClientAction
   methods: [PUT]
 
+api_client_delete:
+  path: /api/v1/clients/{id}
+  controller: App\Controller\Client\DeleteClientAction
+  methods: [DELETE]
