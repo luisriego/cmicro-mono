@@ -100,4 +100,9 @@ class FunctionalTestBase extends WebTestCase
     {
         return self::initDBConnection()->executeQuery('SELECT id FROM user WHERE email = "another@api.com"')->fetchOne();
     }
+
+    protected function getEngelocId()
+    {
+        return self::initDBConnection()->executeQuery('SELECT id FROM client WHERE cnpj = "01383614000162"')->fetchOne();
+    }
 }

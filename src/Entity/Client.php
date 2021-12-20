@@ -8,6 +8,7 @@ use App\Trait\IdentifierTrait;
 use App\Trait\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\Uid\Uuid;
 
 class Client
@@ -43,6 +44,11 @@ class Client
     public function getCompanyName(): string
     {
         return $this->companyName;
+    }
+
+    public function setCompanyName(string $companyName): void
+    {
+        $this->companyName = $companyName;
     }
 
     public function getCnpj(): string
@@ -165,12 +171,14 @@ class Client
         return false;
     }
 
+    #[ArrayShape(['id' => "string", 'companyName' => "string", 'cnpj' => "string", 'xRays' => "null|string", 'createdOn' => "string"])]
     public function toArray(): array
     {
         return [
             'id' => $this->id,
             'companyName' => $this->companyName,
             'cnpj' => $this->cnpj,
+            'xRays' => $this->xRays,
             'createdOn' => $this->createdOn->format(\DateTime::RFC3339),
         ];
     }
