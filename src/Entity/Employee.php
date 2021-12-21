@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Trait\IdentifierTrait;
+use App\Trait\IsActiveTrait;
 use App\Trait\TimestampableTrait;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\Uid\Uuid;
 
 class Employee
 {
-    use IdentifierTrait, TimestampableTrait;
+    use IdentifierTrait, TimestampableTrait, IsActiveTrait;
 
     private string $cpf;
-    private bool $isActive;
     private User $user;
 
     public function __construct(string $cpf, User $user)
@@ -27,24 +28,14 @@ class Employee
         $this->markAsUpdated();
     }
 
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
     public function getCpf()
     {
         return $this->cpf;
     }
 
-    public function getIsActive()
+    public function setCpf(string $cpf): void
     {
-        return $this->isActive;
+        $this->cpf = $this->cleanCpf($cpf);
     }
 
     public function fire(): void
@@ -66,4 +57,21 @@ class Employee
     // {
     //     # code to add a new ticket to the employee
     // }
+
+    private function cleanCpf(string $value): array|string
+    {
+        $value = trim($value);
+        return str_replace(array('.', ',', '-', '/'), '', $value);
+    }
+
+    #[ArrayShape(['id' => "string", 'cpf' => "string", 'user' => "string", 'createdOn' => "string"])]
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'cpf' => $this->cpf,
+            'user' => $this->user->fullName(),
+            'createdOn' => $this->createdOn->format(\DateTime::RFC3339),
+        ];
+    }
 }

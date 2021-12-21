@@ -94,3 +94,11 @@ api_client_get_all:
   path: /api/v1/clients
   controller: App\Controller\Client\GetClientsAction
   methods: [GET]
+
+
+
+# Employee
+api_employee_create:
+  path: /api/v1/employees/create
+  controller: App\Controller\Employee\CreateEmployeeByAdminAction
+  methods: [POST]

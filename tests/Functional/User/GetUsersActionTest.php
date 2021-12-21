@@ -21,7 +21,7 @@ class GetUsersActionTest extends FunctionalTestBase
         self::assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
 
         $responseData = \json_decode($response->getContent(), true);
-        self::assertCount(4, $responseData['users']);
+        self::assertCount(5, $responseData['users']);
     }
 
     public function testGetAllUsersFailBecauseUnauthorize(): void

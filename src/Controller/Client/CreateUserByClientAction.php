@@ -27,8 +27,10 @@ class CreateUserByClientAction extends AbstractController
             throw new UserHasNotAuthorizationException();
         }
 
-        if ($currentUser->getClient()->getCnpj() !== $request->client) {
-            throw new UserHasNotAuthorizationException();
+        if (!$this->isGranted('ROLE_EMPLOYEE')) {
+            if ($currentUser->getClient()->getCnpj() !== $request->client ) {
+                throw new UserHasNotAuthorizationException();
+            }
         }
 
         $user = $this->createUserService->__invoke($request->name, $request->email, $request->client);

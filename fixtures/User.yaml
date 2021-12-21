@@ -18,14 +18,15 @@ App\Entity\User:
     password: <{testing_password_hash}>
     isActive: true
     addRole: 'ROLE_EMPLOYEE'
-#  User-admin:
-#    __construct:
-#      name: Admin
-#      email: admin@api.com
-#      client: '@Client-1'
-#    password: <{testing_password_hash}>
-#    isActive: true
-#    addRole: 'ROLE_ADMIN'
+  User-admin:
+    __construct:
+      name: Alexis
+      email: cmicro@api.com
+      client: '@Client-cmicro'
+    password: <{testing_password_hash}>
+    isActive: true
+    addRole: 'ROLE_ADMIN'
+    surname: 'Nonato'
   User-another:
     __construct:
       name: Another

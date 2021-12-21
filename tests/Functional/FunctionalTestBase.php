@@ -53,7 +53,7 @@ class FunctionalTestBase extends WebTestCase
         if (null === self::$authenticatedAdminClient) {
             self::$authenticatedAdminClient = clone self::$client;
 
-            $user = static::$container->get(DoctrineUserRepository::class)->findOneByEmailOrFail('luis@api.com');
+            $user = static::$container->get(DoctrineUserRepository::class)->findOneByEmailOrFail('cmicro@api.com');
             $token = static::$container->get(JWTTokenManagerInterface::class)->create($user);
 
             self::$authenticatedClient->setServerParameters([

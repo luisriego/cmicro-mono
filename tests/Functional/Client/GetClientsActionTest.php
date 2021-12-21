@@ -22,7 +22,7 @@ class GetClientsActionTest extends FunctionalTestBase
         self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
         $responseData = \json_decode($response->getContent(), true);
-        self::assertCount(2, $responseData['clients']);
+        self::assertCount(3, $responseData['clients']);
     }
 
     public function testGetAllClientsFailBecauseNotEmployee(): void

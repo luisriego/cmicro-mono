@@ -1,4 +1,10 @@
 App\Entity\Client:
+  Client-cmicro:
+    __construct:
+      companyName: "Clínica do Micro EIRELI"
+      cnpj: "04275304000112"
+    xRays: "main"
+
   Client-1:
     __construct:
       companyName: "Gaslima Ltda."

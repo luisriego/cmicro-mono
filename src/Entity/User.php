@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Client $client;
 //    private Collection $phones;
 
-    public function __construct(string $name, string $email, Client $client, ?string $surname = '')
+    public function __construct(string $name, string $email, Client $client)
     {
         $this->id = Uuid::v4()->toRfc4122();
         $this->name = $name;
