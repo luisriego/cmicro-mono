@@ -21,7 +21,7 @@ class CreateUserService
     )
     { }
 
-    public function __invoke(string $name, string $email, string $cnpj): User
+    public function __invoke(string $name, string $email, string $cnpj, bool $isEmployee = false): User
     {
         if (null === $client = $this->clientRepo->findOneByCnpjOrFail($cnpj)) {
             throw ClientNotFoundException::fromCnpj($cnpj);
@@ -32,6 +32,10 @@ class CreateUserService
         }
 
         $user = new User($name, $email, $client);
+
+        if ($isEmployee) {
+            $user->addRole("ROLE_EMPLOYEE");
+        }
 
         try {
             $this->userRepository->save($user);

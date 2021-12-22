@@ -12,7 +12,7 @@ final class Version20211219012921 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Employee table realtionship with user';
+        return 'Employee table relationship with user';
     }
 
     public function up(Schema $schema): void

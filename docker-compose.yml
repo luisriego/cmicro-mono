@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-  cmicro-web:
-    container_name: cmicro-web
+  cmicro-mr-web:
+    container_name: cmicro-mr-web
     build:
       context: ./docker/nginx
       args:
@@ -12,12 +12,12 @@ services:
     volumes:
       - ./public:/appdata/www/public
     depends_on:
-      - cmicro-be
+      - cmicro-mr-be
     networks:
-      - cmicro-network
+      - cmicro-mr-network
 
-  cmicro-be:
-    container_name: cmicro-be
+  cmicro-mr-be:
+    container_name: cmicro-mr-be
     build:
       context: ./docker/php
       args:
@@ -31,16 +31,16 @@ services:
     environment:
       XDEBUG_CLIENT_HOST: 172.17.0.1
       XDEBUG_CLIENT_PORT: 9003
-      PHP_IDE_CONFIG: serverName=cmicro-be
+      PHP_IDE_CONFIG: serverName=cmicro-mr-be
     ports:
       - '1000:8000'
     networks:
-      - cmicro-network
+      - cmicro-mr-network
     depends_on:
-      - cmicro-postgres
+      - cmicro-mr-postgres
 
-  cmicro-postgres:
-    container_name: cmicro-postgres
+  cmicro-mr-postgres:
+    container_name: cmicro-mr-postgres
     image: postgres:14-alpine
     ports:
       - '5432:5432'
@@ -49,12 +49,12 @@ services:
       POSTGRES_PASSWORD: passwd
       POSTGRES_DB: postgres_symfony
     volumes:
-      - cmicro-pgsql-data:/var/lib/postgresql/data
+      - cmicro-mr-pgsql-data:/var/lib/postgresql/data
     networks:
-      - cmicro-network
+      - cmicro-mr-network
 
-  cmicro-mysql:
-    container_name: cmicro-mysql
+  cmicro-mr-mysql:
+    container_name: cmicro-mr-mysql
     image: mysql:8.0.26
     ports:
       - '3336:3306'
@@ -62,33 +62,33 @@ services:
       MYSQL_DATABASE: mysql_symfony
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - cmicro-mysql-data:/var/lib/mysql
+      - cmicro-mr-mysql-data:/var/lib/mysql
     networks:
-      - cmicro-network
+      - cmicro-mr-network
     command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
 
-  cmicro-rabbit:
-    container_name: cmicro-rabbitmq
+  cmicro-mr-rabbit:
+    container_name: cmicro-mr-rabbitmq
     image: rabbitmq:3-management-alpine
     ports:
       - '5672:5672'
       - '15672:15672'
     networks:
-      - cmicro-network
+      - cmicro-mr-network
 
-  cmicro-mailer:
-    container_name: cmicro-mailer
+  cmicro-mr-mailer:
+    container_name: cmicro-mr-mailer
     image: schickling/mailcatcher
     ports:
       - '1025:1025'
       - '1080:1080'
     networks:
-      - cmicro-network
+      - cmicro-mr-network
 
 networks:
-  cmicro-network:
+  cmicro-mr-network:
 
 volumes:
-  cmicro-pgsql-data:
-  cmicro-mysql-data:
+  cmicro-mr-pgsql-data:
+  cmicro-mr-mysql-data:
 
